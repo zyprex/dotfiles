@@ -1,0 +1,132 @@
+let SessionLoad = 1
+if &cp | set nocp | endif
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+let v:this_session=expand("<sfile>:p")
+silent only
+silent tabonly
+cd ~/.vim
+if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
+  let s:wipebuf = bufnr('%')
+endif
+set shortmess=aoO
+argglobal
+%argdel
+set stal=2
+tabnew
+tabrewind
+edit ~/.vim/t_plug.vim
+set splitbelow splitright
+set nosplitbelow
+set nosplitright
+wincmd t
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+argglobal
+setlocal fdm=syntax
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+let s:l = 7 - ((6 * winheight(0) + 10) / 21)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+7
+normal! 0
+lcd ~/.vim
+tabnext
+edit /usr/local/vim/share/vim/vim81/doc/options.txt
+set splitbelow splitright
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
+set nosplitbelow
+set nosplitright
+wincmd t
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+exe '1resize ' . ((&lines * 19 + 12) / 24)
+exe '2resize ' . ((&lines * 1 + 12) / 24)
+argglobal
+if bufexists("~/.vim/plug/coc.nvim/doc/coc.cnx") | buffer ~/.vim/plug/coc.nvim/doc/coc.cnx | else | edit ~/.vim/plug/coc.nvim/doc/coc.cnx | endif
+setlocal fdm=marker
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+let s:l = 335 - ((9 * winheight(0) + 9) / 19)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+335
+normal! 049|
+lcd ~/.vim
+wincmd w
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal nofen
+silent! normal! zE
+let s:l = 1 - ((0 * winheight(0) + 0) / 1)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1
+normal! 0
+lcd ~/.vim
+wincmd w
+exe '1resize ' . ((&lines * 19 + 12) / 24)
+exe '2resize ' . ((&lines * 1 + 12) / 24)
+tabnext 1
+set stal=1
+badd +12 ~/.vim/t_plug.vim
+badd +8103 /usr/local/vim/share/vim/vim81/doc/options.txt
+badd +4 ~/.vim/t_opt.vim
+badd +74 ~/.vim/t_maps.vim
+badd +51 ~/.vim/t_func.vim
+badd +57 ~/.vim/plugin/N_MiscellanousMenu.vim
+badd +4 ~/.vimrc
+badd +185 /usr/share/vim/vim81/doc/popup.txt
+badd +99 ~/.vim/t_face.vim
+badd +27 ~/.vim/plugin/C_DuoPair.vim
+badd +293 ~/.vim/plug/lightline.vim/doc/lightline.txt
+badd +180 ~/.vim/plug/syntastic/doc/syntastic.txt
+badd +134 /usr/share/vim/vim81/doc/mlang.txt
+badd +33 ~/.vim/plugin/V_SurroundOnion.vim
+badd +27 ~/.vim/t_var.vim
+badd +7 ~/.vim/t_addon.vim
+badd +13 ~/Desktop/cc.c
+badd +117 /f/vimQ/SOS-vim.txt
+badd +43 /f/vimQ/ALL_OLD/dos_vim_final/vimrtp/load/funs/M_MiscUse.vim
+badd +22 /f/vimQ/ALL_OLD/dos_vim_final/vimrtp/load/funs/F6_AutoPages.vim
+badd +4 ~/.vim/coc-settings.json
+if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
+  silent exe 'bwipe ' . s:wipebuf
+endif
+unlet! s:wipebuf
+set winheight=1 winwidth=20 shortmess=flnxtToOcF
+set winminheight=1 winminwidth=1
+let s:sx = expand("<sfile>:p:r")."x.vim"
+if file_readable(s:sx)
+  exe "source " . fnameescape(s:sx)
+endif
+let &so = s:so_save | let &siso = s:siso_save
+doautoall SessionLoadPost
+unlet SessionLoad
+" vim: set ft=vim :

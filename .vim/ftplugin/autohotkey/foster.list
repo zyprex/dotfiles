@@ -1,0 +1,11 @@
+IniWrite, Value, Filename, Section, Key
+IniRead, OutputVar, Filename, Section, Key [, Default]
+MsgBox, Text
+MsgBox [, Options, Title, Text, Timeout]
+SetTimer [, Label, PeriodOnOffDelete, Priority]
+#SingleInstance, Force
+Persistent
+#Persistent
+CoordMode, Mouse , Screen
+Loop, Parse, InputVar [, Delimiters, OmitChars]
+StrSplit(String [, Delimiters, OmitChars])

@@ -1,0 +1,19 @@
+{
+    "description" : "Configuration file for coc.nvim",
+    "definitions" : {
+        "filetypes": {
+            "type": "array",
+            "default": ["c","cpp","json"],
+            "description": "Supported filetypes, use empty array for all filetypes.",
+            "items": {
+                "type": "string"
+            }
+        }
+    },
+    "suggest.keepCompleteopt": {
+      "type": "boolean",
+      "description": "When enabled, completeopt is not overriden, auto completion will be disabled if completeopt doesn't have noinsert and noselect.",
+      "default": true
+    },
+    "clangd.disableDiagnostics": true ,
+}

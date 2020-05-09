@@ -1,0 +1,267 @@
+                     ... *SOS-vim.txt* ... 
+                  Quick Refernce For Vim gVim
+                    -- -- -- -- -- -- -- --
+      " Use a single editor well.  The editor should be an 
+        extension of your hand; make sure your editor is 
+          configurable, extensible, and programmable "
+================================================================
+CONTENTS                                              *SOS_vim*
+Symbol                                       |SOS_symbol_intro|
+Mode                                             |SOS_vim_mode|
+Basic                                       |SOS_ins_save_quit|
+Edit                                     |SOS_move_change_edit|
+Search                                |SOS_search_jump_replace|
+Register                                   |SOS_register_macro|
+Format                                             |SOS_format|
+Windows                                     |SOS_buffer_VS_tab|
+Command                                           |SOS_command|
+Misc                                        |SOS_miscellaneous|
+Tips                                                 |SOS_tips|
+================================================================
+Symbol                                       *SOS_symbol_intro*
+{file}
+<key>
+[++opt]
+i_
+
+a.k.a. = also know as
+i.e. = that is, viz
+e.g. = for example
+================================================================
+Mode                                             *SOS_vim_mode*
+
+Normal-Mode                                 <Esc> <C-c> <C-[> <C-o>
+Insert-Mode                                 i gi a <Insert>
+Visual-Mode                                 v gv
+Visual-Mode-linewise                        V
+Visual-Mode-blockwise                       <C-v>
+Select-Mode                                 gh
+Select-Mode-linewise                        gH
+Select-Mode-blockwise                       g<C-v>
+Replace-Mode                                R
+Virtual-Replace-Mode                        gR
+Command-Mode                                :
+Ex_Mode                                     Q gQ
+================================================================
+Basic                                       *SOS_ins_save_quit*
+
+Insert, Append, NewLine ~
+    gI I i <insert> gi a A o O
+Edit, Split open, Vertical_Split open~
+    :e {file} :r {file} :sp {file} :vs {file} :e!
+Save, Save_Exit, SaveAs  ~
+    :w :x :sav {file}
+Quit , Force Quit Save_Quit_All ~
+    :q :q! ZZ ZQ :wqa :xa
+================================================================
+Edit                                     *SOS_move_change_edit*
+
+Word Line Move~
+    0 ^ _ ge b w e g_ $
+          gE B W E
+    g0 g^ gm gj gk g$
+    [count]| [count]- [count]+ [percent]%
+Char Move~
+    f{char} F{char} t{char} T{char} ; ,
+Sentence Paragraph Move~
+    ( ) { } %
+Page Screen Move~
+    H M L
+    <C-y> <C-e> <C-d> <C-u> <C-f> <C-b>
+    [count]gg [count]G
+undo, redo~
+    u <C-r>
+backspace, del~
+    x X
+copy, cut, change~
+    ["x]y{motion} ["x]d{motion} ["x]c{motion}
+line edit, change, subst, replace~
+    yy Y dd D cc C s S r{char}
+case of letters~
+   ~  g~{motion} g~~ v_~
+   gu{motion} gU{motion} guu gUU v_u v_U
+paste~
+    ["x]p ["x]P <MiddleMouse>
+    :[line]put [x] :[line]put! [x]
+text-objects~
+    [operator][a/i][motion]
+    v_[a/i][motion]
+text-objects special motion~
+    w=word s=setence p=paragraph " ' ` > ] ) } t(markup Language Tags, <b>...</b>)
+repeat~
+    [count]. :!! @@
+    :[range]g/{pattern}/[cmd] :[range]g!/{pattern}/[cmd]
+	:[range]norm[!] {commands}
+================================================================
+Search                                *SOS_search_jump_replace*
+
+search forward backward~
+    /{pattern}[/offset]
+    //{offset}
+    ?{pattern}[?offset]
+    ??{offset}
+pattern for search~
+    /one\|two/
+    \zs		`set the start of match`
+    \ze		`set the end of match`
+    \v \V  :h magic
+offset for search~
+    [-+][num] e[-][num] s[+][num] b[-][num] :h search-offset
+repeate search~
+    n N
+keyword quick search~
+    * g* # g# gd gD
+search around file~
+    :fin[d][!] [++opt] [+cmd] {file}
+    :vim[grep][!] /{pattern}/[g][j] {file}
+    :lv[imgrep][!] /{pattern}/[g][j] {file} ...
+    :copen
+    :lopen
+    :ilist /pattern/
+jump~
+    :jumps :clearjumps
+    <C-^> <C-o> <C-i> g; g,
+    [i ]i [I ]I [{ ]} [( ])
+mark~
+    :marks [mark] :delm {mark} :delm!
+    m{a-zA-Z} '{mark} `{mark}
+    g'{mark}  g`{mark}
+mark positon~
+  ' `prev jump mark position` 
+  ^ `exit insert position`
+  " `exit buffer position`
+  . `last modification`
+  [ `last change/yanked position` ]
+  < `last selected position `>
+substitute, replace~
+    :[range]s[ubstitute]/{pattern}/{string}/[flags] [count]
+================================================================
+Register                                   *SOS_register_macro*
+
+use registers~
+    :reg [args]
+    i_<C-r>{reg}
+special registers~
+    " `unnamed reg(last used reg)`
+    . `last insert text reg`
+    % `current file name reg`
+    # `alternate file name reg`
+    : `last cmd reg`
+    / `last search reg`
+    * `clipboard reg`
+    + `clipboard reg`
+    _ `black hole reg`
+append to named reg, clipboard reg~
+    "c "C :let @* .= expression
+record macro, stop record macro, play macro~
+    q{regs} q @{reg} @@ @: @/ @=
+
+================================================================
+Format                                             *SOS_format*
+
+indent~
+    ={motion} [count]== v_=
+    >{motion} <{motion} [count]>> [count]<<
+    :[range]center [width] :[range]right [width] :[range]left [indent]
+join lines~
+    J gJ :[range]j :[range]j!
+================================================================
+Windows                                     *SOS_buffer_VS_tab*
+
+buffer control~
+    :buffers :bufdo
+    <C-w>...c o q w p h j k l t b H J K L T B < > + - | _ = s v r f
+    % `current buffer name`
+    # `alternate buffer name`
+tab control~
+    :tabs :tabdo
+    [count]gt [count]gT
+windows control~
+    :close :only
+================================================================
+Command                                           *SOS_command*
+command line keymaps~
+    q: q/
+    c_<C-p> c_<C-n> c_<C-h> c_<C-w> c_<C-u> c_<C-j> c_<C-m>
+    c_<C-r> {regs} c_<C-r>= c_<C-r><C- f p w a l> :h c_^r
+    <tab> <S-tab> <C-d>
+some useful command~
+    :!
+    :sh
+    :his
+    :let a=1 | echo a
+    :let @/=''
+    :earlier 1m :later
+    :g/{/ .+1,/}/-1 sort
+    :g/^$/d
+    :%s/\%u00a0//g
+    :s/\<./\U&/g
+    :%!xxd :%!xxd -r
+    :sort r /regex/
+    :com :map :list :set list!
+    :set fileformat=unix :set fileencoding=utf-8 :set bomb
+vim start commands~
+    $vim -t tag $vim +<lnum> $vim -h
+================================================================
+Misc                                        *SOS_miscellaneous*
+
+    K :help
+    @"
+    dip
+    ga
+    g?{motion} `ROT23 encode`
+    gf <C-w>f
+    <C-a> <C-x> g<C-a> g<C-x>
+    <C-o>
+    :vs#
+    v_o
+    ``
+    ''
+complete~
+    <C-n> <C-p>
+    <C-x><C- n l d t i ] t f d v u o s p> >
+================================================================
+Tips                                                 *SOS_tips*
+
+highlight pattern~
+    :mat[ch] {group} /{pattern}/
+diff~
+    :vimdiff <file1> <file2>
+
+for special keys~
+CTRL-V (i-mode,c-mode) `enter terminal code`
+code 	key             range
+8-bit 	123 		0-255
+8-bit 	x a1 		00-ff
+16-bit 	u 013b 		0000-ffff
+31-bit 	U 001303a4 	0000000-7fffffff
+
+CTRL-K (i-mode,c-mode) `enter digraph`
+:digraphs!   `Show currently defined digraphs`
+
+fold~
+    zf{motion} zo zO zc zC zd zD za zA zi zm zr zn zN
+    zM `close all folds`
+    zR `open all folds`
+netrw-browse-maps~
+    :Explore
+      (windows split&open) o horz  v vert  p preview
+      (browser)     - go up dir  s sort-by  i style  r reverse I banner
+      (make change) D delete  R rename  x special
+      (create new)  d directory % file
+      (marks)       mf:mark file  mt:set target  mm:move  mc:copy
+      (bookmarks)   mb:make  mB:delete  qb:list  gb:go to
+      (history)     qb:list  u:go up  U:go down
+      (targets)     mt:target Tb:use bookmark  Th:use history
+ctags-cscope~
+    :tag :ts
+    <C-t> <C-]> <C-w>] <C-w>}
+filter to Shell~
+    !{motion}{filter}
+startup time~
+    :vim --clean --startuptime s.log s.log
+generate help file tags~
+    :helptags {dir}
+
+
+" vim: ft=help ma
