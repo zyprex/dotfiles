@@ -3,7 +3,7 @@
 let g:ascii_front = [ getcwd(),strftime("%Y %b.%d %a %H:%M:%S")]
 let g:startify_custom_header =
     \ 'startify#pad(g:ascii_front)'
-let g:startify_custom_footer = ['(c) Copyright 2020 ZhouYu. All Rights Reserved.']
+let g:startify_custom_footer = ['(c) Copyright 2020 zyprex. All Rights Reserved.']
 let g:startify_skiplist=['^.*\\lavanic\\emag.*']
 let g:startify_lists = [
   \ { 'type': 'sessions',  'header': ['   Sessions']       },
